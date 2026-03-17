@@ -1,0 +1,13 @@
+<suite name="AutomationSuite" parallel="tests" thread-count="2">
+<test name="UI Tests">
+<classes>
+<class name="tests.LoginTest"/>
+</classes>
+</test>
+
+<test name="API Tests">
+<classes>
+<class name="apiTests.UserAPITest"/>
+</classes>
+</test>
+</suite>
