@@ -11,93 +11,49 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.openqa.selenium.By;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class LoginTest extends BaseTest{
+	
+	
+	By username = By.name("username");
+	By password = By.name("password");
+	By submit = By.id("submit");
+	By pagetitle = By.className("post-title");
+	By logout = By.xpath("//a[text()='Log out']");
+	By LoginHomePage = By.xpath("//a[text()='Test login']");
 
-@Test
+@Test(groups = {"Login", "Smoke"})
 public void loginTest(){
 	
-	//remove duplicate from array
-
-int arr[]= {1, 2, 3, 4, 4, 7, 9};
-//String arr1[] = {"String", "string1", "string2"};
-
-Set<Integer> set = new HashSet<>();
-for(int i = 0;i<arr.length;i++) {
-	System.out.println(arr[i]);
-	set.add(arr[i]);
+	DriverFactory.getDriver().get("https://practicetestautomation.com/practice-test-login/");
+	DriverFactory.getDriver().findElement(username).sendKeys("student");
+	DriverFactory.getDriver().findElement(password).sendKeys("Password123");
+	DriverFactory.getDriver().findElement(submit).click();
+	String str = DriverFactory.getDriver().findElement(pagetitle).getText();
+	
+	Assert.assertEquals(str, "Logged In Successfully");
 }
-System.out.println(set);
 
-//Reverse eachword in sentense
-
-String s = "Iam Automation Test Engineer";
-
-String arr1[]= s.split(" ");
-System.out.println(Arrays.toString(arr1));
-String rev="";
-
-for(int j=0;j<arr1.length;j++) {
+@Test(groups = {"logout", "regression"})
+public void loginOut(){
 	
-	String word = arr1[j];
+	DriverFactory.getDriver().get("https://practicetestautomation.com/practice-test-login/");
+	DriverFactory.getDriver().findElement(username).sendKeys("student");
+	DriverFactory.getDriver().findElement(password).sendKeys("Password123");
+	DriverFactory.getDriver().findElement(submit).click();
+	String str = DriverFactory.getDriver().findElement(pagetitle).getText();
+	Assert.assertEquals(str, "Logged In Successfully");
+	DriverFactory.getDriver().findElement(logout).click();
+	String str1 = DriverFactory.getDriver().findElement(LoginHomePage).getText();
 	
-	for(int s1 = word.length()-1; s1>=0;s1--) {
-		System.out.println(word.charAt(s1));
-		rev = rev+word.charAt(s1);
-		}
-	rev = rev+(" ");
-}
-System.out.println(rev);
-
-//Print vocels and consonents
-
-String t ="Hello World, I am in Hyderabad";
-
-String t1 = t.toLowerCase();
-
-String v = "";
-String c = "";
-
-for(int x = 0; x< t1.length(); x++) {
-	char ch = t1.charAt(x);
-	
-	if(ch>'a' && ch<'z') {
-		if(ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u') {
-			v = v+ch;
-		}else {
-		c=c+ch;
-		}
-	}
+	Assert.assertEquals(str1, "Test login");
 	
 	
 }
 
-System.out.println(v);
-System.out.println(c);
-
-//Second largest element in array
-
-int[] num = {1, 5,500, 10, 45, 60, 100};
-int largenumber = num[0];
-int secondnumber = 0;
-
-for(int y = 1; y<num.length;y++) {
-	if(largenumber<num[y]) {
-		secondnumber = largenumber;
-		largenumber = num[y];
-	}else if(num[y]> secondnumber && num[y]!=largenumber) {
-		secondnumber = num[y];
-	}
-	
-	
-}
-System.out.println(largenumber);
-System.out.println(secondnumber);
 
 
-
-
-
-}
 }
