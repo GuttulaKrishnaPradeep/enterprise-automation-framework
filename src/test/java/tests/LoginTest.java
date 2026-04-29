@@ -24,6 +24,7 @@ public class LoginTest extends BaseTest{
 	
 	private byte uppercaseLetter;
 	private byte lowercaseLetter;
+	String str;
 
 	/*
 	 * By username = By.name("username"); By password = By.name("password"); By
@@ -168,7 +169,9 @@ public class LoginTest extends BaseTest{
 		
 		String str = "pradeepe";
 		char c;
-		int count = 0;;
+		int count = 0;
+		int fmax = 0;
+		int smax = 0;
 		Map<Character, Integer> map = new HashMap<>();
 		
 		for(int i= 0;i<str.length();i++) {
@@ -184,6 +187,17 @@ public class LoginTest extends BaseTest{
 		}
 		
 		System.out.println(map.toString());
+		
+		for (Map.Entry<Character, Integer> entry : map.entrySet()) {
+			Character k = entry.getKey();
+			Integer v = entry.getValue();
+			
+			if(v>fmax) {
+				smax = fmax;
+				fmax = v;
+				
+			}
+		}
 
 }
 
